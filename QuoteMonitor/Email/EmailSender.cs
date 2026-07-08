@@ -43,7 +43,7 @@ namespace QuoteMonitor.Email
 
             mailMessage.To.Add(_hostEmail);
 
-            foreach (var email in _emailsBase.emails)
+            foreach (var email in _emailsBase.Emails)
             {
                 mailMessage.Bcc.Add(email);
             }

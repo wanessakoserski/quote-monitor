@@ -24,7 +24,7 @@ namespace QuoteMonitor.QuoteProviders.BrapiDev
                 public string LongName { get; set; } = string.Empty;
 
                 [JsonPropertyName("regularMarketPrice")]
-                public decimal RegularMarketPrice;
+                public decimal RegularMarketPrice { get; set; }
             }
         }
     }

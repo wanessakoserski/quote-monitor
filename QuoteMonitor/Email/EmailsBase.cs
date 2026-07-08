@@ -2,6 +2,6 @@
 {
     internal class EmailsBase
     {
-        public List<string> emails = new List<string>();
+        public List<string> Emails { get; set; } = new List<string>();
     }
 }
