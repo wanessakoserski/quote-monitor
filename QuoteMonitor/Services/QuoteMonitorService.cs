@@ -26,9 +26,9 @@ namespace QuoteMonitor.Services
             {
                 CurrentQuote? currentQuote = await _quoteProvider.GetCurrentQuoteAsync(trackingQuote.Symbol);
 
-                if (currentQuote is null)
+                if (currentQuote is null || !trackingQuote.isNewPrice(currentQuote.Price))
                 {
-                    await Task.Delay(TimeSpan.FromSeconds(watchDelay * 0.5));
+                    await Task.Delay(TimeSpan.FromSeconds(watchDelay * 0.6));
                     continue;
                 }
 

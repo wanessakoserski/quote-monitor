@@ -8,9 +8,9 @@
 
         public CurrentQuote(string symbol, decimal price, DateTime requestAt)
         {
-            Symbol = symbol;
-            Price = price;
-            RequestAt = requestAt;
+            this.Symbol = symbol;
+            this.Price = price;
+            this.RequestAt = requestAt;
         }
     }
 }
