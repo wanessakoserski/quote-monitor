@@ -1,4 +1,5 @@
 ﻿using QuoteMonitor.Domains;
+using QuoteMonitor.Email;
 using QuoteMonitor.QuoteProviders;
 
 namespace QuoteMonitor.Services
@@ -6,10 +7,17 @@ namespace QuoteMonitor.Services
     internal class QuoteMonitorService
     {
         private readonly IQuoteProvider _quoteProvider;
+        private readonly EmailMessage _emailMessage;
+        private readonly EmailSender _emailSender;
 
-        public QuoteMonitorService(IQuoteProvider quoteProvider)
+        public QuoteMonitorService(
+            IQuoteProvider quoteProvider, 
+            EmailMessage emailMessage, 
+            EmailSender emailSender)
         {
             _quoteProvider = quoteProvider;
+            _emailMessage = emailMessage;
+            _emailSender = emailSender;
         }
 
         public async Task Start(TrackingQuote trackingQuote, int watchDelay = 90)
@@ -21,17 +29,22 @@ namespace QuoteMonitor.Services
                 if (currentQuote is null)
                 {
                     await Task.Delay(TimeSpan.FromSeconds(watchDelay * 0.5));
-
                     continue;
                 }
 
                 if (trackingQuote.ShouldSell(currentQuote.Price))
                 {
                     Console.WriteLine("Should sell");
+
+                    var message = _emailMessage.CreateSellAdviceMessage(trackingQuote.Symbol, currentQuote.Price);
+                    await _emailSender.SendAsync(message);
                 }
                 else if (trackingQuote.ShouldBuy(currentQuote.Price))
                 {
                     Console.WriteLine("Should buy");
+
+                    var message = _emailMessage.CreateBuyAdviceMessage(trackingQuote.Symbol, currentQuote.Price);
+                    await _emailSender.SendAsync(message);
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(watchDelay));

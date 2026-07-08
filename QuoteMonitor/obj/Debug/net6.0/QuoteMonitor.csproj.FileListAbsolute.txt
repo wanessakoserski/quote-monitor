@@ -13,3 +13,9 @@ C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\obj\Debug\net6.0\refint\Qu
 C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\obj\Debug\net6.0\QuoteMonitor.pdb
 C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\obj\Debug\net6.0\QuoteMonitor.genruntimeconfig.cache
 C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\obj\Debug\net6.0\ref\QuoteMonitor.dll
+C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\bin\Debug\net6.0\DotNetEnv.dll
+C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\bin\Debug\net6.0\Superpower.dll
+C:\Users\nessa\source\repos\QuoteMonitor\QuoteMonitor\obj\Debug\net6.0\QuoteMonitor.csproj.CopyComplete
