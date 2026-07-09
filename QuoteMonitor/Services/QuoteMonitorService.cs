@@ -20,13 +20,19 @@ namespace QuoteMonitor.Services
             _emailSender = emailSender;
         }
 
-        public async Task Start(TrackingQuote trackingQuote, int watchDelay = 90)
+        public async Task Start(TrackingQuote trackingQuote, int watchDelay = 60)
         {
             while (true)
             {
                 CurrentQuote? currentQuote = await _quoteProvider.GetCurrentQuoteAsync(trackingQuote.Symbol);
 
-                if (currentQuote is null || !trackingQuote.isNewPrice(currentQuote.Price))
+                if (currentQuote is null)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(watchDelay * 0.1));
+                    continue;
+                }
+
+                if (!trackingQuote.isNewPrice(currentQuote.Price))
                 {
                     await Task.Delay(TimeSpan.FromSeconds(watchDelay * 0.6));
                     continue;
@@ -35,16 +41,30 @@ namespace QuoteMonitor.Services
                 if (trackingQuote.ShouldSell(currentQuote.Price))
                 {
                     Console.WriteLine("Should sell");
-
-                    var message = _emailMessage.CreateSellAdviceMessage(trackingQuote.Symbol, currentQuote.Price);
-                    await _emailSender.SendAsync(message);
+                    
+                    try
+                    {
+                        var message = _emailMessage.CreateSellAdviceMessage(trackingQuote.Symbol, currentQuote.Price);
+                        await _emailSender.SendAsync(message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Problemas com a conexão com o host - envio de email sobre venda >> " + ex.ToString());
+                    }
                 }
                 else if (trackingQuote.ShouldBuy(currentQuote.Price))
                 {
                     Console.WriteLine("Should buy");
 
-                    var message = _emailMessage.CreateBuyAdviceMessage(trackingQuote.Symbol, currentQuote.Price);
-                    await _emailSender.SendAsync(message);
+                    try
+                    {
+                        var message = _emailMessage.CreateBuyAdviceMessage(trackingQuote.Symbol, currentQuote.Price);
+                        await _emailSender.SendAsync(message);
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Problemas com a conexão com o host - envio de email sobre compra >> " + ex.ToString());
+                    }
                 }
 
                 await Task.Delay(TimeSpan.FromSeconds(watchDelay));

@@ -6,7 +6,10 @@ namespace QuoteMonitor.QuoteProviders.BrapiDev
     internal class BrapiDevQuoteProvider : IQuoteProvider
     {
         private const string BaseUrl = "https://brapi.dev/api/v2/stocks";
-        private readonly HttpClient _httpClient = new HttpClient();
+        private readonly HttpClient _httpClient = new HttpClient()
+        {
+            Timeout = TimeSpan.FromSeconds(10)
+        };
 
         public async Task<CurrentQuote?> GetCurrentQuoteAsync(string symbol)
         {
