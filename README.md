@@ -81,6 +81,8 @@ Adicionar novos tipos de mensagens ou alterar o provedor de e-mail sem modificar
 
 Falhas durante o envio também não interrompem o monitoramento. Caso o envio não seja realizado, o erro é registrado e a aplicação continua funcionando normalmente.
 
+Apenas erros de não ter informações para conexão é interrompido.
+
 ---
 
 ### 4. Configuração
