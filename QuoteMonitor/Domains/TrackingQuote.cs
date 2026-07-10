@@ -24,7 +24,7 @@
             return currentPrice >= SellingPrice;
         }
 
-        public bool isNewPrice(decimal currentPrice)
+        public bool IsNewPrice(decimal currentPrice)
         {
             if (currentPrice == LastTrack)
             {

@@ -1,0 +1,19 @@
+{
+  "quotes": [
+    {
+      "symbol": "PETR4",
+      "buy": 39.43,
+      "sell": 39.45
+    },
+    {
+      "symbol": "VALE3",
+      "buy": 73.20,
+      "sell": 73.40
+    },
+    {
+      "symbol": "MGLU3",
+      "buy": 4.90,
+      "sell": 4.98
+    }
+  ]
+}
