@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using QuoteMonitor.Domains;
 using QuoteMonitor.Email;
+using QuoteMonitor.Encryption;
 using QuoteMonitor.QuoteProviders;
 using QuoteMonitor.QuoteProviders.BrapiDev;
 using QuoteMonitor.Services;
@@ -14,7 +15,6 @@ namespace QuoteMonitor
     {
         static async Task Main(string[] args)
         {
-            
             if (args.Length != 3 && args.Length != 1)
             {
                 Console.WriteLine("Uso esperado >> QuoteMonitor.exe <ATIVO> <PRECO_PARA_VENDA> <PRECO_PARA_COMPRA>");
@@ -22,6 +22,20 @@ namespace QuoteMonitor
             }
 
             Env.Load();
+
+            var envContent = FileEncryption.DecryptFile("credentials.enc");
+
+            foreach (var line in envContent.Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries))
+            {
+                var parts = line.Split('=', 2);
+
+                if (parts.Length == 2)
+                {
+                    Environment.SetEnvironmentVariable(
+                        parts[0].Trim(),
+                        parts[1].Trim());
+                }
+            }
 
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json", optional: false)
