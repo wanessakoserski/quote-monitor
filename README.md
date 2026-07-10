@@ -15,7 +15,7 @@ Nessa pasta encontram-se o executável `QuoteMonitor.exe` e todos os arquivos de
 Para monitorar um único ativo:
 
 ```bash
-dotnet run PETR4 39.45 39.43
+.\QuoteMonitor.exe PETR4 39.45 39.43
 ```
 
 Onde:
@@ -27,10 +27,10 @@ Onde:
 Para monitorar todos os ativos definidos em `quotes-base.json`:
 
 ```bash
-dotnet run all
+.\QuoteMonitor.exe all
 ```
 
-Caso queira adicionar outro e-mail para recebre o aviso é em `emails-base.json`.
+Caso queira adicionar outro e-mail para recebimento o aviso é em `emails-base.json`.
 
 ### 1. Consulta das cotações
 
@@ -40,7 +40,9 @@ Foi criada a interface `IQuoteProvider` para desacoplar o restante da aplicaçã
 
 A API gratuita escolhida possui suporte apenas para alguns ativos (PETR4, VALE3 e MGLU3), mas essa limitação fica isolada dentro da implementação do provider.
 
-Além disso, falhas de comunicação com a API não interrompem a execução do monitor. Caso uma consulta falhe, a aplicação continua executando normalmente e tenta novamente na próxima iteração.
+Além disso, falhas de comunicação com a API não interrompem a execução do monitor. Caso uma consulta falhe, a aplicação avisa e continua executando normalmente e tenta novamente na próxima iteração.
+
+A parte de lidar com falhas no projeto existe, mas é simples e objetiva.
 
 ---
 
