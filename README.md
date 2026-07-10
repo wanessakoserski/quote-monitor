@@ -89,8 +89,8 @@ Apenas erros de não ter informações para conexão é interrompido.
 
 As configurações foram separadas conforme sua responsabilidade.
 
-- `.env`
-    - credenciais do remetente;
+- `credentials.enc`
+    - credenciais do remetente (.env criptografado);
 - `appsettings.json`
     - configurações SMTP;
 - `emails-base.json`
@@ -98,13 +98,13 @@ As configurações foram separadas conforme sua responsabilidade.
 - `quotes-base.json`
     - ativos monitorados.
 
-Para este projeto de console, o `.env` foi utilizado para evitar deixar credenciais diretamente no código.
+Para este projeto de console, a ideia de `.env` criptografado foi utilizado para evitar deixar credenciais do e-mail diretamente no código.
 
 Essa não seria a abordagem ideal em um ambiente de produção. O mais adequado seria utilizar variáveis de ambiente configuradas no servidor ou um serviço de gerenciamento de segredos, como Azure Key Vault.
 
 Porém, como este é um projeto de console disponibilizado em um repositório para avaliação, não existe um ambiente de deploy responsável por fornecer essas credenciais automaticamente. Sem alguma configuração local, a funcionalidade de envio de e-mails não poderia ser testada por outra pessoa.
 
-Por isso, a decisão foi utilizar um `.env` local no repositório, mantendo fora do `.gitignore`. Dessa forma, o projeto continua funcional.
+Por isso, a decisão foi utilizar um `.env` local no repositório criptografado. Embora a chave de descriptografia também faça parte do projeto, o que torna possível recuperar seu conteúdo, essa solução foi adotada para evitar que as credenciais ficassem imediatamente visíveis em texto plano no repositório, mantendo ao mesmo tempo o projeto totalmente funcional para fins de avaliação e execução.
 
 ---
 
@@ -114,7 +114,7 @@ O `QuoteMonitorService` é o responsável por coordenar todo o ciclo da aplicaç
 
 Seu funcionamento consiste em:
 
-1. consultar a cotação;
+1. consultar as cotações;
 2. verificar se houve alteração de preço;
 3. aplicar as regras de compra e venda;
 4. enviar notificações quando necessário;
