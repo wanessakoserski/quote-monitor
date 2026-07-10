@@ -104,7 +104,7 @@ Essa não seria a abordagem ideal em um ambiente de produção. O mais adequado 
 
 Porém, como este é um projeto de console disponibilizado em um repositório para avaliação, não existe um ambiente de deploy responsável por fornecer essas credenciais automaticamente. Sem alguma configuração local, a funcionalidade de envio de e-mails não poderia ser testada por outra pessoa.
 
-Por isso, a decisão foi utilizar um `.env` local, mantendo-o fora do versionamento por meio do `.gitignore`. Dessa forma, o projeto continua funcional.
+Por isso, a decisão foi utilizar um `.env` local no repositório, mantendo fora do `.gitignore`. Dessa forma, o projeto continua funcional.
 
 ---
 
